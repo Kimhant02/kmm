@@ -27,10 +27,10 @@
             animation: fadeIn 2s ease-in-out;
         }
         .navbar {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(131, 129, 117, 0.368);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(25, 37, 194, 0.37);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
@@ -52,11 +52,11 @@
         .button:hover {
             background-color: #8CCCF9;
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(226, 186, 143, 0.3);
         }
         #myImage {
             display: none;
-            max-width: 100%;
+            max-width: 60%;
             margin-top: 20px;
         }
         @keyframes fadeIn {
@@ -66,22 +66,22 @@
     </style>
 </head>
 <body>
-    <h1 class="name">kim</h1>
+    <h1 class="name">Kimhant Phangtaisong</h1>
     <nav class="navbar">
         <div class="button-container">
-            <button class="button" id="toggleButton" onclick="toggleImage()">Super Resume</button>
-            <!-- ลิ้งก์ไปหน้า measure.html -->
-            <a href="measure.html">
-                <button class="button">Measure</button>
-            </a>
-            <!-- ลิ้งก์ไปหน้า lottery.html -->
-            <a href="lottery.html">
-                <button class="button">Lottery</button>
-            </a>
+            <button class="button" id="toggleButton" onclick="toggleImage()">Abot me</button>
+         <!-- ลิ้งก์ไปหน้า lottery.html -->
+         <a href="HomeMitor">
+            <button class="button">Home Mitor</button>
+        </a>
+         <a href="networks">
+             <button class="button">WifiAP config</button>
+        </a>
+   
         </div>
     </nav>
     
-    <img id="myImage" src="CVunnop.PNG" alt="Super Resume Image">
+    <img id="myImage" src="mee.jpg" alt=" Image">
 
     <script>
         let isImageShown = false;

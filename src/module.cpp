@@ -117,9 +117,8 @@ void Config_server()
     server.on("/styles.css", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/styles.css"); });
 
-    server.on("/me", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/me.jpg"); });
-    
+    server.on("/mee.jpg", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/mee.jpg"); });
 
     server.on("bscripts.js", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/bscripts.js"); });
@@ -127,16 +126,11 @@ void Config_server()
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/index.html"); });
 
-    server.on("/Buttons", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/Buttons.html"); });
-
-    server.on("/info", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/info.html"); });
-
     server.on("/networks", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/networks.html"); });
-    server.on("/testt", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/testt.html"); });
+
+    server.on("/HomeMitor", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/HomeMitor.html"); });
     
        server.on("/yadom.js", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/yadom.js"); });

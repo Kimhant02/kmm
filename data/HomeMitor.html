@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbfbfb;
+            color: #000000;
+            margin: 0;
+            padding: 30px;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .measurement {
+            background: #df570e;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgb(0, 0, 0);
+            flex: 1 1 200px;
+            text-align: center;
+        }
+        .measurement strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .light-control {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .light-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            width: 150px; /* กำหนดความกว้าง */
+            height: 50px; /* กำหนดความสูง */
+        }
+        .light-button.on {
+            background-color: #28a745;
+        }
+        .light-button.off {
+            background-color: #dc3545;
+        }
+        .next-button {
+            background-color: #045506;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        .next-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Your Paramitor</h1>
+    <div class="container" id="measurements">
+        <div class="measurement" id="voltage">
+            <strong>แรงดันไฟ:</strong> 0 V
+        </div>
+        <div class="measurement" id="current">
+            <strong>กระแส:</strong> 0 A
+        </div>
+        <div class="measurement" id="temperature">
+            <strong>อุณหภูมิ:</strong> 0 °C
+        </div>
+        <div class="measurement" id="humidity">
+            <strong>ความชื้น:</strong> 0 %
+        </div>
+        <div class="measurement" id="windDirection">
+            <strong>ทิศทางลม:</strong> 0°
+        </div>
+    </div>
+
+    <div class="light-control">
+        <h2>Lighting</h2>
+        <button class="light-button" id="bedroom" onclick="toggleLight('bedroom')">bedroom: OFF</button>
+        <button class="light-button" id="livingroom" onclick="toggleLight('livingroom')">livingroom: OFF</button>
+        <button class="light-button" id="kitchen" onclick="toggleLight('kitchen')">kitchen: OFF</button>
+        <button class="light-button" id="outdoor" onclick="toggleLight('outdoor')">outdoor: OFF</button>
+    </div>
+
+    <a href="/" class="next-button">Home</a>
+
+    <script>
+        function getRandomValue(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+
+        function updateMeasurements() {
+            document.getElementById('voltage').innerHTML = `<strong>แรงดันไฟ:</strong> ${getRandomValue(220, 240)} V`;
+            document.getElementById('current').innerHTML = `<strong>กระแส:</strong> ${getRandomValue(5, 10)} A`;
+            document.getElementById('temperature').innerHTML = `<strong>อุณหภูมิ:</strong> ${getRandomValue(23, 35)} °C`;
+            document.getElementById('humidity').innerHTML = `<strong>ความชื้น:</strong> ${getRandomValue(30, 40)} %`;
+            document.getElementById('windDirection').innerHTML = `<strong>ทิศทางลม:</strong> ${getRandomValue(160, 180)}°`;
+        }
+
+        function toggleLight(room) {
+            const button = document.getElementById(room);
+            if (button.classList.contains('on')) {
+                button.classList.remove('on');
+                button.classList.add('off');
+                button.innerText = roomToDisplay(room) + ': OFF';
+            } else {
+                button.classList.remove('off');
+                button.classList.add('on');
+                button.innerText = roomToDisplay(room) + ': ON';
+            }
+        }
+
+        function roomToDisplay(room) {
+            switch(room) {
+                case 'bedroom': return 'bedroom';
+                case 'livingroom': return 'livingroom';
+                case 'kitchen': return 'kitchen';
+                case 'outdoor': return 'outdoor';
+                default: return '';
+            }
+        }
+
+        setInterval(updateMeasurements, 2000);
+        updateMeasurements();
+    </script>
+
+</body>
+</html>
