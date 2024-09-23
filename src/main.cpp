@@ -9,5 +9,7 @@ void setup() {
 } 
 
 void loop() {
+    Serial.println("1");
+    delay (2000);
 
 }

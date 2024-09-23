@@ -119,6 +119,7 @@ void Config_server()
 
     server.on("/me", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/me.jpg"); });
+    
 
     server.on("bscripts.js", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/bscripts.js"); });
@@ -134,8 +135,10 @@ void Config_server()
 
     server.on("/networks", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/networks.html"); });
-
-    server.on("/yadom.js", HTTP_GET, [](AsyncWebServerRequest *request)
+    server.on("/testt", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/testt.html"); });
+    
+       server.on("/yadom.js", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/yadom.js"); });
 
    server.on("/networksConfig", HTTP_POST, handleNetworksConfig );

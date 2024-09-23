@@ -1,43 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <title>Bootstrap 5 Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="styles.css" rel="stylesheet">
-  <script src="bscripts.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Trirong');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Trirong", serif;
+            background: linear-gradient(135deg, #b6540f, #021011);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: center;
+        }
+        .name {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .navbar {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+        .button {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            background-color: #510300;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .button:hover {
+            background-color: #8CCCF9;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        #myImage {
+            display: none;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
+    <h1 class="name">kim</h1>
+    <nav class="navbar">
+        <div class="button-container">
+            <button class="button" id="toggleButton" onclick="toggleImage()">Super Resume</button>
+            <!-- ลิ้งก์ไปหน้า measure.html -->
+            <a href="measure.html">
+                <button class="button">Measure</button>
+            </a>
+            <!-- ลิ้งก์ไปหน้า lottery.html -->
+            <a href="lottery.html">
+                <button class="button">Lottery</button>
+            </a>
+        </div>
+    </nav>
+    
+    <img id="myImage" src="CVunnop.PNG" alt="Super Resume Image">
 
-<div class="container-fluid p-5 bg-primary text-white text-center">
-  <h1>My First Bootstrap Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
-  
-<div class="container mt-5 border">
-  <div class="row">
-    <div class="col-sm-4 border">
-      <h3>สุดหล่อ 1 </h3>
-      <p>สุดหล่อ</p>
-      <p>สุดหล่อ</p>
-    </div>
-    <div class="col-sm-4 border">
-      <h3>สุดหล่อ 2 </h3>
-      <p>สุดหล่อ</p>
-      <p>โสุดหล่อ</p>
-    </div>
-    <div class="col-sm-4 border">
-      <h3>สุดหล่อ 3 </h3>        
-      <p>สุดหล่อ </p>
-      <p>โสุดหล่อ </p>
-    </div>
-  </div>
-</div>
+    <script>
+        let isImageShown = false;
 
-<div class="d-grid">
-   <a href="/Buttons " type="button" class="btn btn-outline-primary"> More</button>
-  
-</div>
-
+        function toggleImage() {
+            var img = document.getElementById("myImage");
+            if (!isImageShown) {
+                img.style.display = "block"; // แสดงรูปภาพ
+                isImageShown = true; // เปลี่ยนสถานะเป็นแสดงรูปภาพแล้ว
+            } else {
+                img.style.display = "none"; // ซ่อนรูปภาพเมื่อกดปุ่มอีกครั้ง
+                isImageShown = false; // เปลี่ยนสถานะกลับไปยังไม่แสดง
+            }
+        }
+    </script>
 </body>
 </html>
