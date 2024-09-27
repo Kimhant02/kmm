@@ -6,7 +6,7 @@
     <title>Home</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Trirong');
-        
+
         body {
             margin: 0;
             padding: 0;
@@ -15,7 +15,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: top;
+            justify-content: center;
             align-items: center;
         }
         .name {
@@ -32,7 +32,6 @@
             border-radius: 15px;
             box-shadow: 0 8px 32px 0 rgba(25, 37, 194, 0.37);
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
         }
         .button-container {
             display: flex;
@@ -48,16 +47,44 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
         }
         .button:hover {
             background-color: #8CCCF9;
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(226, 186, 143, 0.3);
         }
+        .button:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: 0;
+        }
+        .button:hover:before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .button span {
+            position: relative;
+            z-index: 1;
+        }
         #myImage {
             display: none;
-            max-width: 60%;
-            margin-top: 20px;
+            max-width: 50%;
+            margin-top: 100px;
+        }
+        .info-text {
+            display: none;
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
@@ -65,35 +92,44 @@
         }
     </style>
 </head>
-<body>
+<body onclick="hideImage(event)">
     <h1 class="name">Kimhant Phangtaisong</h1>
     <nav class="navbar">
         <div class="button-container">
-            <button class="button" id="toggleButton" onclick="toggleImage()">Abot me</button>
-         <!-- ลิ้งก์ไปหน้า lottery.html -->
-         <a href="HomeMitor">
-            <button class="button">Home Mitor</button>
-        </a>
-         <a href="networks">
-             <button class="button">WifiAP config</button>
-        </a>
-   
+            <button class="button" id="toggleButton" onclick="showImage(event)"><span>About me</span></button>
+            <a href="SmartMonitor">
+                <button class="button"><span>Smart Monitor</span></button>
+            </a>
+            <a href="Fun">
+                <button class="button"><span>Game Ezy</span></button>
+            </a>
         </div>
     </nav>
     
-    <img id="myImage" src="mee.jpg" alt=" Image">
+    <img id="myImage" src="mee.jpg" alt="Image">
+    <div class="info-text" id="infoText">คลิกตรงไหนก็ได้เพื่อซ่อนรูปภาพครับ</div>
 
     <script>
         let isImageShown = false;
 
-        function toggleImage() {
+        function showImage(event) {
+            event.stopPropagation(); 
             var img = document.getElementById("myImage");
+            var infoText = document.getElementById("infoText");
             if (!isImageShown) {
-                img.style.display = "block"; // แสดงรูปภาพ
-                isImageShown = true; // เปลี่ยนสถานะเป็นแสดงรูปภาพแล้ว
-            } else {
-                img.style.display = "none"; // ซ่อนรูปภาพเมื่อกดปุ่มอีกครั้ง
-                isImageShown = false; // เปลี่ยนสถานะกลับไปยังไม่แสดง
+                img.style.display = "block"; 
+                infoText.style.display = "block"; 
+                isImageShown = true; 
+            }
+        }
+
+        function hideImage(event) {
+            if (isImageShown) {
+                var img = document.getElementById("myImage");
+                var infoText = document.getElementById("infoText");
+                img.style.display = "none"; 
+                infoText.style.display = "none"; 
+                isImageShown = false; 
             }
         }
     </script>

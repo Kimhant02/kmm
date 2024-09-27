@@ -3,62 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Measure</title>
+    <title>Monitor</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fbfbfb;
-            color: #000000;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
             margin: 0;
             padding: 30px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
             text-align: center;
             margin-bottom: 20px;
+            color: #2c3e50;
         }
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         .measurement {
-            background: #df570e;
-            border: 1px solid #000000;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgb(0, 0, 0);
-            flex: 1 1 200px;
+            background: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            flex: 1 1 150px;
             text-align: center;
+            transition: transform 0.3s;
+        }
+        .measurement:hover {
+            transform: translateY(-3px);
         }
         .measurement strong {
             display: block;
             margin-bottom: 10px;
+            font-size: 1.2em;
         }
         .light-control {
             margin-top: 20px;
             text-align: center;
+            width: 100%;
         }
         .light-button {
-            background-color: #dc3545;
+            background-color: #e74c3c;
             color: white;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin: 5px;
-            width: 150px; /* กำหนดความกว้าง */
-            height: 50px; /* กำหนดความสูง */
+            width: 130px;
+            height: 40px;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
         }
         .light-button.on {
-            background-color: #28a745;
+            background-color: #2ecc71;
         }
-        .light-button.off {
-            background-color: #dc3545;
+        .light-button.off:hover {
+            background-color: #c0392b;
+        }
+        .light-button.on:hover {
+            background-color: #27ae60;
         }
         .next-button {
-            background-color: #045506;
+            background-color: #2980b9;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -68,15 +83,16 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
+            transition: background-color 0.3s;
         }
         .next-button:hover {
-            background-color: #45a049;
+            background-color: #3498db;
         }
     </style>
 </head>
 <body>
 
-    <h1>Your Paramitor</h1>
+    <h1> Parametor</h1>
     <div class="container" id="measurements">
         <div class="measurement" id="voltage">
             <strong>แรงดันไฟ:</strong> 0 V

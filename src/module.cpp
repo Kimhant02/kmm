@@ -129,8 +129,15 @@ void Config_server()
     server.on("/networks", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/networks.html"); });
 
-    server.on("/HomeMitor", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/HomeMitor.html"); });
+    server.on("/SmartMonitor", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/SmartMonitor.html"); });
+
+     server.on("/Fun", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/Fun.html"); });
+              
+     server.on("/bounce.mp3", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/bounce.mp3"); });
+   
     
        server.on("/yadom.js", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/yadom.js"); });

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมปลดหนี้</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        canvas {
+            border: 2px solid white;
+            background-color: #222;
+        }
+        #score {
+            font-size: 1.5rem;
+            margin: 20px;
+        }
+        #startButton, #homeButton {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #00ff00;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        #gameOver {
+            display: none;
+            font-size: 2rem;
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ได้200แต้มโอน100</h1>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <div id="score">คะแนน: 0</div>
+    <div id="gameOver">Game Over!</div>
+    <button id="startButton">เริ่มเกม</button>
+    <button id="homeButton" style="display:none;" onclick="location.href='/'">Home</button>
+
+    <audio id="bounceSound" src="bounce.mp3" preload="auto"></audio>
+    <audio id="gameOverSound" src="gameover.mp3" preload="auto"></audio>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const paddleWidth = 10, paddleHeight = 80;
+        const ballSize = 10;
+
+        let paddleY = (canvas.height - paddleHeight) / 2;
+        let ballX, ballY;
+        let ballSpeedX = 2;
+        let ballSpeedY = 2;
+        let score = 0;
+        let isGameRunning = false;
+
+        function startGame() {
+            score = 0;
+            resetBall();
+            isGameRunning = true;
+            document.getElementById('score').innerText = `คะแนน: ${score}`;
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('homeButton').style.display = 'none';
+            draw();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPaddle();
+            drawBall();
+            moveBall();
+            checkCollision();
+            document.getElementById('score').innerText = `คะแนน: ${score}`;
+
+            if (isGameRunning) {
+                requestAnimationFrame(draw);
+            }
+        }
+
+        function drawPaddle() {
+            ctx.fillStyle = '#00ff00';
+            ctx.fillRect(0, paddleY, paddleWidth, paddleHeight);
+        }
+
+        function drawBall() {
+            ctx.fillStyle = '#ff0000';
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function moveBall() {
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            
+            if (ballY <= ballSize || ballY >= canvas.height - ballSize) {
+                ballSpeedY = -ballSpeedY;
+                playBounceSound();
+            }
+
+            
+            if (ballX <= 0) {
+                endGame();
+            }
+
+            
+            if (ballX >= canvas.width - ballSize) {
+                ballSpeedX = -ballSpeedX;
+                ballX = canvas.width - ballSize; 
+                playBounceSound(); 
+            }
+        }
+
+        function checkCollision() {
+           
+            if (ballX <= paddleWidth && ballY >= paddleY && ballY <= paddleY + paddleHeight) {
+                ballSpeedX = -ballSpeedX;
+                score++;
+                increaseBallSpeed();
+                playBounceSound();
+            }
+        }
+
+        function increaseBallSpeed() {
+            ballSpeedX += 0.5;
+            ballSpeedY += 0.5;
+        }
+
+        function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
+            ballSpeedX = 2;
+            ballSpeedY = 2;
+        }
+
+        function endGame() {
+            isGameRunning = false;
+            document.getElementById('gameOver').style.display = 'block';
+            document.getElementById('startButton').style.display = 'block';
+            document.getElementById('homeButton').style.display = 'block';
+            playGameOverSound();
+        }
+
+        function playBounceSound() {
+            const sound = document.getElementById('bounceSound');
+            sound.currentTime = 0; 
+            sound.play(); 
+        }
+
+        function playGameOverSound() {
+            const sound = document.getElementById('gameOverSound');
+            sound.currentTime = 0; 
+            sound.play(); 
+        }
+
+        document.getElementById('startButton').addEventListener('click', startGame);
+
+        document.getElementById('homeButton').addEventListener('click', () => {
+            location.href = '/';
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (isGameRunning) {
+                const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+                paddleY = mouseY - paddleHeight / 2;
+
+                if (paddleY < 0) paddleY = 0;
+                if (paddleY > canvas.height - paddleHeight) paddleY = canvas.height - paddleHeight;
+            }
+        });
+    </script>
+</body>
+</html>
