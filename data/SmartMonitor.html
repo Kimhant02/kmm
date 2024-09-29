@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #e3946d;
             color: #333;
             margin: 0;
             padding: 30px;
@@ -73,8 +73,8 @@
             background-color: #27ae60;
         }
         .next-button {
-            background-color: #2980b9;
-            color: white;
+            background-color: #6b7881;
+            color: rgb(10, 9, 9);
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -86,13 +86,29 @@
             transition: background-color 0.3s;
         }
         .next-button:hover {
-            background-color: #3498db;
+            background-color: #373f44;
+        }
+        #notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8282829f; 
+            color: rgb(0, 0, 0);
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-align: center;
         }
     </style>
+    <div id="notification"></div>
 </head>
 <body>
 
-    <h1> Parametor</h1>
+    <h1>Parametor</h1>
     <div class="container" id="measurements">
         <div class="measurement" id="voltage">
             <strong>แรงดันไฟ:</strong> 0 V
@@ -136,15 +152,31 @@
 
         function toggleLight(room) {
             const button = document.getElementById(room);
+            let status;
+
             if (button.classList.contains('on')) {
                 button.classList.remove('on');
                 button.classList.add('off');
                 button.innerText = roomToDisplay(room) + ': OFF';
+                status = 'OFF';
             } else {
                 button.classList.remove('off');
                 button.classList.add('on');
                 button.innerText = roomToDisplay(room) + ': ON';
+                status = 'ON';
             }
+
+            const notification = document.getElementById('notification');
+            notification.innerText = `Lighting ${roomToDisplay(room)} trun ${status} .`;
+            notification.style.display = 'block';
+            notification.style.opacity = '1';
+
+            setTimeout(() => {
+                notification.style.opacity = '0'; 
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500);
+            }, 1500);
         }
 
         function roomToDisplay(room) {
