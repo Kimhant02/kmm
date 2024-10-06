@@ -1,6 +1,6 @@
 #include "module.h"
 
-const char *ssid = "kimmm";
+const char *ssid = "kimhant_002";
 const char *password = "";
 IPAddress ip;
 IPAddress gateways;
